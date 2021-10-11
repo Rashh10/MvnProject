@@ -16,31 +16,10 @@ pipeline {
                 bat "mvn package"
             }
         }
-        stage('Sonarqube') {
-    environment {
-        scannerHome = tool 'SonarQubeScanner'
-    }
-    steps {
-        withSonarQubeEnv('SonarQubeDefault') {
-            sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar" +
-                    " -f pom.xml " +
-                    "-Dsonar.login=admin " +
-                    "-Dsonar.password=#Dream10 " +
-                    "-Dsonar.projectKey=$PROJ_NAME " +
-                    "-Dsonar.projectName=$PROJ_NAME " + 
-                    "-Dsonar.projectVersion=${params.version} " +
-                    "-Drelease.version=${params.version} "+
-                    "-Dsonar.language=java " +
-                    "-Dsonar.java.source=1.8 " +
-                    "-Dsonar.java.target=1.8 " +
-                    "-Dsonar.scm.disabled=True " +
-                    "-Dsonar.projectBaseDir=. " +
-                    
+        stage('SonarQube Stage') {
+            steps {
+                bat "mvn clean test sonar:sonar -D sonar.login=108879aeb256d582c404d5f8f42a0c7c8d4b675a"
+            }
         }
-        timeout(time: 10, unit: 'MINUTES') {
-            waitForQualityGate abortPipeline: true
-        }
-    }
-}
     }
 }
