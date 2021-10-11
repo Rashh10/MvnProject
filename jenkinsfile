@@ -18,7 +18,7 @@ pipeline {
         }
         stage('SonarQube Stage') {
             steps {
-                bat "mvn sonar:sonar"
+                bat "mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.credentials=login:e82caea4f0cce3240aa168d09be7f161871dba5a"
             }
         }
     }
