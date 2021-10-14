@@ -28,11 +28,7 @@ pipeline {
             archive 'target/*.jar'
             }
         }
-        stage("Email Build Status"){
-        steps{
-            mail bcc: '', body: 'Verification ', cc: '', from: '', replyTo: '', subject: 'Verification', to: 'rashmipandey7870@gmail.com'
-            }
-        }
+    
     }
     
 }
