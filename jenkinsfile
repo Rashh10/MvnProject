@@ -29,23 +29,25 @@ pipeline {
                 bat "mvn clean test sonar:sonar -D sonar.login=108879aeb256d582c404d5f8f42a0c7c8d4b675a"
             }
         }
-         stage('SonarQube'){
-        withSonarQubeEnv(credentialsId: 'dummy') {
-            bat "mvn sonar:sonar -D sonar.login=108879aeb256d582c404d5f8f42a0c7c8d4b675a"
-            
-    // some block
-    }
-    }
-    stage('Quality Gate') {
-       waitForQualityGateabortPipeline: true
+        stage("Quality Gate") 
+        {
+            steps
+            {
+              timeout(time: 1, unit: 'HOURS') 
+              {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+        }
+        stage('success')
+        {
+            steps
+            {
+                echo "project succeeded"
+            }
+        }
         
-    }
-    
-    stage('Results') {
-        junit '**/target/surefire-reports/TEST-*.xml'
-        archiveArtifacts'target/*.jar'
-    }
-}
+        
     
     }
     
