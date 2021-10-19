@@ -30,7 +30,9 @@ pipeline {
             }
         }
         stage('Quality Gate') {
+            steps{
                 waitForQualityGateabortPipeline: true
+               }
         
         }
         stage("Consolidate Results"){
