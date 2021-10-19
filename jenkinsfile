@@ -29,7 +29,7 @@ pipeline {
         {
             steps
             {
-                withSonarQubeEnv('SonarQubeScanner')
+                withSonarQubeEnv('SonarQubeDefault')
                 {
                 bat 'mvn sonar:sonar -D sonar.login=108879aeb256d582c404d5f8f42a0c7c8d4b675a'
                 }
