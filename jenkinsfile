@@ -1,6 +1,14 @@
 pipeline {
     agent any
     stages {
+        stage ('checkout ')
+        {
+            steps
+            { 
+                 git 'https://github.com/Rashh10/MvnProject.git'
+            }
+        }
+        
         stage('Cleaning Stage') {
             steps {
                 bat "mvn clean"
@@ -16,10 +24,21 @@ pipeline {
                 bat "mvn package"
             }
         }
+        stage('Deploy')
+        {
+            steps
+            {
+                bat "mvn deploy"
+            }
+        }
         stage('SonarQube Stage') {
             steps {
                 bat "mvn clean test sonar:sonar -D sonar.login=108879aeb256d582c404d5f8f42a0c7c8d4b675a"
             }
+        }
+        stage('Quality Gate') {
+                waitForQualityGateabortPipeline: true
+        
         }
         stage("Consolidate Results"){
         steps{
