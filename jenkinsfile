@@ -50,7 +50,7 @@ pipeline {
         {
             steps
             {
-                echo "project succeeded successfully"
+                echo "project succeeded"
             }
         }
         
