@@ -41,7 +41,7 @@ pipeline {
             {
               timeout(time: 1, unit: 'HOURS') 
               {
-               
+                sleep 120
                 waitForQualityGate abortPipeline: true
               }
             }
@@ -53,7 +53,6 @@ pipeline {
                 echo "project succeeded"
             }
         }
-        
         
     
     }
