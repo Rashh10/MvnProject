@@ -41,7 +41,7 @@ pipeline {
             {
               timeout(time: 1, unit: 'HOURS') 
               {
-                sleep 120
+                sleep 140
                 waitForQualityGate abortPipeline: true
               }
             }
